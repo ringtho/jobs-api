@@ -1,4 +1,5 @@
 require('dotenv').config()
+require('express-async-errors')
 const express = require('express')
 
 const app = express()
@@ -14,4 +15,13 @@ app.use('*', notFoundMiddleware)
 
 
 const PORT = process.env.PORT || 5050
-app.listen(PORT, console.log(`Server listening on port ${PORT}`))
+
+const start = async () => {
+    try {
+        await app.listen(PORT, console.log(`Server listening on port ${PORT}`))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+start()

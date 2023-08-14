@@ -1,19 +1,29 @@
 
-const getAllJobs = (req, res) => {
+const getAllJobs = async (req, res) => {
     res.status(200).json({msg: 'All Jobs!'})
 }
 
-const createJob = (req, res) => {
+const createJob = async (req, res) => {
     res.status(200).json({msg: 'Create Jobs!'})
 }
 
-const getSingleJob = (req, res) => {
+const getSingleJob = async (req, res) => {
     res.status(200).json({msg: 'Single Jobs!'})
 }
 
-const updateJob = (req, res) => {
+const updateJob = async (req, res) => {
     res.status(200).json({msg: 'Update Jobs!'})
 }
 
+const deleteJob = async (req, res) => {
+    res.status(200).json({msg: 'Delete Jobs!'})
+}
 
-module.exports = { getAllJobs, createJob, getSingleJob, updateJob }
+
+module.exports = {
+    getAllJobs, 
+    createJob, 
+    getSingleJob, 
+    updateJob, 
+    deleteJob 
+}

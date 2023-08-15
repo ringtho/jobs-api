@@ -1,9 +1,13 @@
+const User = require('../models/User')
+const { StatusCodes } = require('http-status-codes')
+
 const register = async (req, res) => {
-    res.status(200).json({ msg: "Register New User" })
+    const user = await User.create({...req.body}) 
+    res.status(StatusCodes.CREATED).json({ msg: "Created New User", data: user })
 }
 
 const login = async (req, res) => {
-    res.status(200).json({ msg: "User Login" })
+    res.status(StatusCodes.CREATED).json({ msg: "User Login" })
 }
 
 module.exports = { register, login }

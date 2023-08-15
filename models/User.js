@@ -22,7 +22,7 @@ const UserSchema = new Schema({
         type: String,
         required: [true, "Please provide a password"],
         minLength: 6,
-        maxLength: 12
+        maxLength: 255
     }
 })
 

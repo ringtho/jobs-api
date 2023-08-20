@@ -26,7 +26,25 @@ const getSingleJob = async (req, res) => {
 }
 
 const updateJob = async (req, res) => {
-  res.status(200).json({ msg: 'Update Jobs!' })
+  const {
+    user: { userId },
+    params: { id: jobId },
+    body: { company, position }
+  } = req
+
+  if (!company || !position) {
+    throw new BadRequestError('Company or Position fields cannot be empty')
+  }
+
+  const job = await Job.findOneAndUpdate(
+    { _id: jobId, createdBy: userId },
+    req.body,
+    { new: true, runValidators: true }
+  )
+  if (!job) {
+    throw new NotFoundError(`No job with id ${jobId}`)
+  }
+  res.status(StatusCodes.OK).json({ job })
 }
 
 const deleteJob = async (req, res) => {

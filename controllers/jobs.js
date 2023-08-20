@@ -14,7 +14,15 @@ const createJob = async (req, res) => {
 }
 
 const getSingleJob = async (req, res) => {
-  res.status(200).json({ msg: 'Single Jobs!' })
+  const { user: { userId }, params: { id: jobId } } = req
+  const job = await Job.findOne({
+    _id: jobId,
+    createdBy: userId
+  })
+  if (!job) {
+    throw new NotFoundError(`No job with id ${jobId}`)
+  }
+  res.status(StatusCodes.OK).json({ job })
 }
 
 const updateJob = async (req, res) => {
